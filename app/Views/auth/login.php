@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>HopeFund - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
@@ -25,6 +25,11 @@
 <body class="bg-gradient-primary">
 
     <div class="container">
+    <?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger">
+        <?= session()->getFlashdata('error') ?>
+    </div>
+<?php endif; ?>
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -35,21 +40,24 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 bg-login-image d-flex align-items-center justify-content-center border">
+                               <h1 class="fw-bold" style="font-size: 5rem;">HopeFund</h1>
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" action="<?= site_url('Auth/proses_login') ?>" method="post">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                            <input type="text" class="form-control form-control-user"
+                                                id="username" name="username" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            name="password"
+                                                id="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -58,9 +66,9 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google

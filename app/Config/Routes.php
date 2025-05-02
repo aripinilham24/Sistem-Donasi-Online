@@ -7,8 +7,11 @@ use CodeIgniter\Router\RouteCollection;
  */
 // $routes->get('/', 'Home::index');
 // $routes->get('/', 'Auth::index');
-$routes->get('/', 'DashboardAdmin::index');
-$routes->get('/dashboard', 'DashboardAdmin::index');
+$routes->get('/', 'Auth::login');
+$routes->post('/Auth/proses_login', 'Auth::proses_login');
+$routes->get('/auth/logout', 'Auth::logout');
+$routes->get('/dashboard', 'DashboardAdmin::index', ['filter' => 'auth']);
+$routes->get('/logout', 'Auth::logout');
 $routes->get('/lihatdonasi', 'Cdonasi::index');
 $routes->get('/tambahdata', 'Cdonasi::tambah_data');
 $routes->post('/simpan_data', 'Cdonasi::simpan_data');

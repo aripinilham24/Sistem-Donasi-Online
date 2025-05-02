@@ -13,4 +13,8 @@ class Muser extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['id', 'nama', 'email', 'password', 'role', 'foto'];
+
+    public function getUser($username) {
+        return $this->where('nama',$username)->first();
+    }
 }
