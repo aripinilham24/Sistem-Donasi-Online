@@ -19,7 +19,6 @@ class DashboardAdmin extends BaseController
     }
     public function index()
     {
-        // dd(session()->get()); 
         $data['datadb'] = [
             'user' => $this->model_user->countAll(),
             'donasi' => $this->model_donasi->countAll(),
@@ -29,7 +28,6 @@ class DashboardAdmin extends BaseController
             'foto'  => session()->get('foto'),
             'username'  => session()->get('username')
         ];
-        // return view('index');
         echo view('template/header.php', $data);
         echo view('template/sidebar.php', $data);
         echo view('template/topnavbar.php', $data);

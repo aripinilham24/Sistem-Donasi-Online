@@ -7,6 +7,10 @@ use App\Models\Muser;
 
 class Auth extends BaseController
 {
+    protected $model;
+    public function __construct() {
+        $this->model = new Muser();
+    }
     public function login()
     {
         return view('auth/login');
@@ -17,10 +21,9 @@ class Auth extends BaseController
         
         if ($this->request->getMethod() == 'POST') {
             $session = session();
-            $model = new Muser();
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
-            $user = $model->getUser($username);
+            $user = $this->model->getUser($username);
 
             if ($user && $password === $user['password']) {
                 $session->set([
@@ -34,8 +37,6 @@ class Auth extends BaseController
                 return redirect()->back()->with('error', 'Login gagal! Username atau password salah.');
             }
             
-        } else {
-            echo 'tidak masuk';
         }
 
     }
