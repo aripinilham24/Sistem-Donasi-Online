@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- bootstrap cdn end -->
 
 </head>
@@ -34,7 +34,7 @@
                         <a class="nav-link rounded" href="#">Tentang Kami</a>
                     </div>
                     <div>
-                        <button class="btn btn-outline-light">Login</button>
+                        <a href="<?= site_url('auth/login') ?>" class="btn btn-outline-light">Login</a>
                     </div>
                 </div>
             </div>
@@ -48,10 +48,14 @@
             <div id="carouselExampleInterval" class="carousel slide mt-5" data-bs-ride="carousel">
                 <div class="carousel-inner rounded shadow">
                     <div class="carousel-item active" data-bs-interval="10000">
-                        <img width="1280" height="400" src="https://810bf2a659dbe63f18a7-974cbc13ede5a0c8fe2137f6c1d2be33.ssl.cf6.rackcdn.com/file/2024-11-20/SKiouFlUiXNI.webp" class="d-block rounded object-fit-cover w-100" alt="...">
+                        <img width="1280" height="400"
+                            src="https://810bf2a659dbe63f18a7-974cbc13ede5a0c8fe2137f6c1d2be33.ssl.cf6.rackcdn.com/file/2024-11-20/SKiouFlUiXNI.webp"
+                            class="d-block rounded object-fit-cover w-100" alt="...">
                     </div>
                     <div class="carousel-item" data-bs-interval="2000">
-                        <img width="1280" height="400" src="https://810bf2a659dbe63f18a7-974cbc13ede5a0c8fe2137f6c1d2be33.ssl.cf6.rackcdn.com/file/2024-11-18/BdqBU63OQQpW.webp" class="d-block rounded object-fit-cover w-100" alt="...">
+                        <img width="1280" height="400"
+                            src="https://810bf2a659dbe63f18a7-974cbc13ede5a0c8fe2137f6c1d2be33.ssl.cf6.rackcdn.com/file/2024-11-18/BdqBU63OQQpW.webp"
+                            class="d-block rounded object-fit-cover w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
@@ -83,6 +87,23 @@
                     <a class="nav-link fs-3" href="#"><i class="bi bi-heart-pulse-fill"></i> Donasi</a>
                 </li>
             </ul>
+        </div>
+
+        <!-- daftar kampanye -->
+        <div class="container mt-5 shadow p-4">
+            <h3 class="">Daftar Kampanye</h3>
+            <div class="container row gap-4">
+                <?php foreach($donasi as $data): ?>
+            <div class="card shadow" style="width: 18rem;">
+                <img src="<?= base_url('assets/uploads/'.$data['gambar'])?>" class="card-img-top img-fluid mt-2 rounded" alt="<?= $data['gambar']?>">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $data['judul']?></h5>
+                    <p class="card-text"><?= $data['deskripsi']?></p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <?php endforeach ?>
+            </div>
         </div>
     </main>
 </body>
