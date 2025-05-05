@@ -14,5 +14,21 @@ class Mdonasi extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['id', 'judul', 'deskripsi', 'target_donasi', 'terkumpul', 'deadline', 'gambar', 'dibuat_pada'];
 
+    public function getCurrentDana()
+    {
+        return $this->select('terkumpul, target_donasi')
+                   ->orderBy('id', 'DESC')
+                   ->first();
+    }
+    
+    // Hitung persentase
+    public function getPercentage()
+    {
+        $data = $this->getCurrentDana();
+        if ($data && $data['target_donasi'] > 0) {
+            return ($data['terkumpul'] / $data['target_donasi']) * 100;
+        }
+        return 0;
+    }
     
 }

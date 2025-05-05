@@ -93,16 +93,25 @@
         <div class="container mt-5 shadow p-4">
             <h3 class="">Daftar Kampanye</h3>
             <div class="container row gap-4">
-                <?php foreach($donasi as $data): ?>
-            <div class="card shadow" style="width: 18rem;">
-                <img src="<?= base_url('assets/uploads/'.$data['gambar'])?>" class="card-img-top img-fluid mt-2 rounded" alt="<?= $data['gambar']?>">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $data['judul']?></h5>
-                    <p class="card-text"><?= $data['deskripsi']?></p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-            <?php endforeach ?>
+                <?php foreach ($donasi['donasi'] as $data): ?>
+                    <div class="card shadow" style="width: 18rem; height: 25rem;">
+                        <img src="<?= base_url('assets/uploads/' . $data['gambar']) ?>"
+                            class="card-img-top img-fluid mt-2 rounded object-fit-cover" style="height: 180px; width: 100%;"
+                            alt="<?= $data['gambar'] ?>">
+                        <div class="card-body overflow-auto">
+                            <h5 class="card-title fw-bold"><?= $data['judul'] ?></h5>
+                            <p class="card-text"><?= $data['deskripsi'] ?></p>
+                        </div>
+                        <div class="card-footer rounded mb-2">
+                            <span>Dana terkumpul</span>
+                            <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="<?= $donasi['persentase']?>"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar text-bg-info" style="width: <?= $donasi['width']?>%"><?= $donasi['persentase']?>%</div>
+                            </div>
+
+                        </div>
+                    </div>
+                <?php endforeach ?>
             </div>
         </div>
     </main>
