@@ -10,13 +10,16 @@ class Beranda extends BaseController
 {
     public function index()
     {
+        // $model = new Mdonasi();
+        // $persentase = $model->getPercentage();
+        // $data['donasi'] = [
+        //     'donasi' => $model->findAll(),
+        //     'persentase' => $persentase,
+        //     'width' => round($persentase)
+        // ];
         $model = new Mdonasi();
-        $persentase = $model->getPercentage();
-        $data['donasi'] = [
-            'donasi' => $model->findAll(),
-            'persentase' => $persentase,
-            'width' => round($persentase)
-        ];
+    $data['donasi'] = $model->getAllWithPercentage();
         return view('user/beranda', $data);
+        // echo dd($data);
     }
 }
