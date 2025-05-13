@@ -18,8 +18,11 @@ class Beranda extends BaseController
         //     'width' => round($persentase)
         // ];
         $model = new Mdonasi();
-    $data['donasi'] = $model->getAllWithPercentage();
-        return view('user/beranda', $data);
+        $data['donasi'] = $model->getAllWithPercentage();
+        echo view('user/template/head.php', $data);
+        echo view('user/template/header.php', $data);
+        echo view('user/template/content.php', $data);
+        echo view('user/template/footer.php', $data);
         // echo dd($data);
     }
 }
