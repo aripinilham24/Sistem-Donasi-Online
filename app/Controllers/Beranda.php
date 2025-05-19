@@ -27,11 +27,14 @@ class Beranda extends BaseController
 
     public function detail_kampanye($id)
     {
-        $data['data'] = $this->model->find($id);
+        $data['data'] = [
+            'detail_kampanye' => $this->model->find($id),
+            'donatur_kampanye' => $this->model_transaksi->donatur_kampanye($id),
+            'total_donatur' => $this->model_transaksi->total_donatur($id)
+        ];
 
         echo view('user/template/head.php', $data);
         echo view('user/template/header.php', $data);
         echo view('user/detail_kampanye.php', $data);
-        echo view('user/template/footer.php', $data);
     }
 }
