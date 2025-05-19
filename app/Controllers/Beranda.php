@@ -5,13 +5,16 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Mdonasi;
+use App\Models\Mtransaksi;
 
 class Beranda extends BaseController
 {
     protected $model;
+    protected $model_transaksi;
     public function __construct()
     {
         $this->model = new Mdonasi();
+        $this->model_transaksi = new Mtransaksi();
     }
     public function index()
     {
