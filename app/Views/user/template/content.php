@@ -59,7 +59,7 @@
                             alt="<?= $data['gambar'] ?>">
                         <div class="card-body overflow-auto">
                             <h5 class="card-title fw-bold"><?= $data['judul'] ?></h5>
-                            <p class="card-text"><?= $data['deskripsi'] ?></p>
+                            <p class="card-text"><?= $data['deskripsi_singkat'] ?></p>
                         </div>
                         <div class="card-footer rounded mb-2 d-flex flex-column gap-3">
                             <div>

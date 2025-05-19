@@ -18,13 +18,7 @@
 
         <div class="col-7">
             <h3>Deskripsi</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sit repellat, cupiditate minus, incidunt
-                eius maiores amet quo cumque totam quibusdam aliquam magni optio quisquam ut quos commodi mollitia
-                ipsum.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem distinctio, nemo aliquid deserunt sint
-                illo quis eligendi odio voluptatum quos perferendis doloremque labore nesciunt, enim ab nostrum ipsa
-                reiciendis nulla!
-            </p>
+            <p><?= $data['deskripsi']?></p>
         </div>
 
         <div class="col-7">
