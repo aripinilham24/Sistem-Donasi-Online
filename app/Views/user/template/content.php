@@ -32,16 +32,16 @@
         <div class="container shadow rounded mt-5">
             <ul class="navbar-nav d-flex flex-row justify-content-between gap-5">
                 <li class="nav-item">
-                    <a class="nav-link fs-3" href="#"><i class="bi bi-heart-pulse-fill"></i> Donasi</a>
+                    <a class="nav-link fs-3" href="<?= site_url('beranda/kategori/sosial')?>"><i class="bi bi-globe-americas"></i> Sosial</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-3" href="#"><i class="bi bi-heart-pulse-fill"></i> Donasi</a>
+                    <a class="nav-link fs-3"href="<?= site_url('beranda/kategori/pendidikan')?>"><i class="bi bi-mortarboard"></i> Pendidikan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-3" href="#"><i class="bi bi-heart-pulse-fill"></i> Donasi</a>
+                    <a class="nav-link fs-3" href="<?= site_url('beranda/kategori/lingkungan')?>"><i class="bi bi-bank"></i> Lingkungan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-3" href="#"><i class="bi bi-heart-pulse-fill"></i> Donasi</a>
+                    <a class="nav-link fs-3" href="<?= site_url('beranda/kategori/keagamaan')?>"><i class="bi bi-tree"></i> Keagamaan</a>
                 </li>
             </ul>
         </div>

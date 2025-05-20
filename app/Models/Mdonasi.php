@@ -12,11 +12,26 @@ class Mdonasi extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'judul', 'deskripsi', 'target_donasi', 'terkumpul', 'deadline', 'gambar', 'dibuat_pada'];
+    protected $allowedFields    = ['id', 'judul', 'deskripsi', 'target_donasi', 'terkumpul', 'deadline', 'gambar', 'dibuat_pada', 'kategori'];
 
     public function getAllWithPercentage()
     {
         $donations = $this->findAll();
+        
+        // Hitung persentase untuk setiap donasi
+        foreach ($donations as &$donation) {
+            $donation['persentase'] = $this->calculatePercentage(
+                $donation['terkumpul'], 
+                $donation['target_donasi']
+            );
+        }
+        
+        return $donations;
+    }
+
+    public function getAllKategori($kategori)
+    {
+        $donations = $this->where('kategori', $kategori)->findAll();
         
         // Hitung persentase untuk setiap donasi
         foreach ($donations as &$donation) {

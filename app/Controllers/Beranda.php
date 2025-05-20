@@ -25,6 +25,13 @@ class Beranda extends BaseController
         echo view('user/template/footer.php', $data);
     }
 
+    public function kategori($kategori) {
+        $data['donasi'] = $this->model->getAllKategori($kategori);
+        echo view('user/template/head.php', $data);
+        echo view('user/template/header.php', $data);
+        echo view('user/kategori_kampanye.php', $data);
+    }
+
     public function detail_kampanye($id)
     {
         $data['data'] = [
