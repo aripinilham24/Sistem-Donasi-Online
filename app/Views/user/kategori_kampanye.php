@@ -4,7 +4,7 @@
             Tidak ada data donasi untuk saat ini.
         </div>
     <?php else: ?>
-        <h3>Daftar Kampanye <?= $donasi[0]['kategori'] ?></h3>
+        <h3>Daftar Kampanye <?= $kategori?></h3>
         <div class="container row justify-content-evenly">
             <?php foreach ($donasi as $data): ?>
                 <?php $width = round($data['persentase'] ?? 0) ?>

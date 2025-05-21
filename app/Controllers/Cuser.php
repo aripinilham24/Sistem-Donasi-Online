@@ -9,25 +9,29 @@ use App\Models\Muser;
 class Cuser extends BaseController
 {
     protected $model;
+    protected $data;
     public function __construct() 
     {
         $this->model = new Muser();
+        $this->data = $this->getSession();
     }
     public function index()
     {
+        $data['session'] = $this->data;
         $data['datauser'] = $this->model->findAll();
         echo view('template/header.php');
         echo view('template/sidebar.php');
-        echo view('template/topnavbar.php');
+        echo view('template/topnavbar.php', $data);
         echo view('Vuser.php',$data);
         echo view('template/footer.php');
     }
 
     public function create()
     {
+        $data['session'] = $this->data;
         echo view('template/header.php');
         echo view('template/sidebar.php');
-        echo view('template/topnavbar.php');
+        echo view('template/topnavbar.php',$data);
         echo view('Vtambah_user.php');
         echo view('template/footer.php');
     }
@@ -65,6 +69,8 @@ class Cuser extends BaseController
 
     public function edit($id)
     {
+        $data['session'] = $this->data;
+
         $data['user'] = $this->model->find($id);
 
         if (!$data['user']) {
@@ -72,7 +78,7 @@ class Cuser extends BaseController
         }
         echo view('template/header.php');
         echo view('template/sidebar.php');
-        echo view('template/topnavbar.php');
+        echo view('template/topnavbar.php', $data);
         echo view('Vedit_user.php',$data);
         echo view('template/footer.php');
     }

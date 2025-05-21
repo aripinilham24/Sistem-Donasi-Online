@@ -50,7 +50,7 @@
 
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <a href="<?= base_url('lihatdonasi')?>">
+        <a href="<?= site_url('cdonasi')?>">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -105,6 +105,7 @@
                 <tr>
                   <th>No</th>
                   <th>Judul</th>
+                  <th>Deskripsi Singkat</th>
                   <th>Deskripsi</th>
                   <th>Target</th>
                   <th>Terkumpul</th>
@@ -119,10 +120,10 @@
                   <tr>
                     <td><?= esc($no++) ?></td>
                     <td><?= esc($data['judul']) ?></td>
+                    <td><?= esc($data['deskripsi_singkat']) ?></td>
                     <td><?= esc($data['deskripsi']) ?></td>
                     <td><?= number_format($data['target_donasi'], 0, ',', '.') ?></td>
                     <td><?= number_format($data['terkumpul'], 0, ',', '.') ?></td>
-
                     <td><?= esc($data['dibuat_pada']) ?></td>
                     <td><?= esc($data['deadline']) ?></td>
                     <td><img src="<?= base_url('assets/uploads/' . $data['gambar']) ?>" width="120" height="100"></td>

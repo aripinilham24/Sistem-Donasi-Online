@@ -19,14 +19,11 @@ class DashboardAdmin extends BaseController
     }
     public function index()
     {
+        $data['session'] = $this->getSession();
         $data['datadb'] = [
             'user' => $this->model_user->countAll(),
             'donasi' => $this->model_donasi->countAll(),
             'datadonasi' => $this->model_donasi->findAll(),
-            'title' => 'Dashboard',
-            'role'  => session()->get('role'),
-            'foto'  => session()->get('foto'),
-            'username'  => session()->get('username')
         ];
         echo view('template/header.php', $data);
         echo view('template/sidebar.php', $data);

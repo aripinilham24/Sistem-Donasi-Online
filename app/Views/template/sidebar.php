@@ -41,7 +41,7 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?= base_url('lihatdonasi')?>">Lihat Donasi</a>
+                        <a class="collapse-item" href="<?= site_url('cdonasi')?>">Lihat Donasi</a>
                         <a class="collapse-item" href="<?= base_url('tambahdata')?>">Tambah Donasi</a>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ class Mdonasi extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'judul', 'deskripsi', 'target_donasi', 'terkumpul', 'deadline', 'gambar', 'dibuat_pada', 'kategori'];
+    protected $allowedFields    = ['id', 'judul', 'deskripsi_singkat', 'deskripsi', 'target_donasi', 'terkumpul', 'deadline', 'gambar', 'dibuat_pada', 'kategori'];
 
     public function getAllWithPercentage()
     {

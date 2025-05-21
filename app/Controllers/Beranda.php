@@ -26,6 +26,7 @@ class Beranda extends BaseController
     }
 
     public function kategori($kategori) {
+        $data['kategori'] = $kategori;
         $data['donasi'] = $this->model->getAllKategori($kategori);
         echo view('user/template/head.php', $data);
         echo view('user/template/header.php', $data);

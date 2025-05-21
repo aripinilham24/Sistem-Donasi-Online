@@ -55,4 +55,13 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
     }
+
+    public function getSession() {
+        return [
+            'title' => 'Dashboard',
+            'role'  => session()->get('role'),
+            'foto'  => session()->get('foto'),
+            'username'  => session()->get('username')
+        ];
+    }
 }

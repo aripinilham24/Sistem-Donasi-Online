@@ -22,6 +22,8 @@
                 <tr>
                   <th>No</th>
                   <th>Judul</th>
+                  <th>Kategori</th>
+                  <th>Deskripsi Singkat</th>
                   <th>Deskripsi</th>
                   <th>Target</th>
                   <th>Terkumpul</th>
@@ -37,6 +39,8 @@
                   <tr>
                     <td><?= esc($no++) ?></td>
                     <td><?= esc($data['judul']) ?></td>
+                    <td><?= esc($data['kategori']) ?></td>
+                    <td><?= esc($data['deskripsi_singkat']) ?></td>
                     <td><?= esc($data['deskripsi']) ?></td>
                     <td><?= number_format($data['target_donasi'], 0, ',', '.') ?></td>
                     <td><?= number_format($data['terkumpul'], 0, ',', '.') ?></td>
