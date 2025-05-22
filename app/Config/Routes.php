@@ -27,5 +27,6 @@ $routes->post('/simpan_user', 'Cuser::store');
 $routes->get('/edit_user/(:num)', 'Cuser::edit/$1');
 $routes->put('/update_user/(:num)', 'Cuser::update/$1');
 $routes->get('/hapus_user/(:num)', 'Cuser::delete/$1');
+$routes->get('cuser/setting', 'Cuser::setting');
 
 

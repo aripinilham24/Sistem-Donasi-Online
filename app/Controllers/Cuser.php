@@ -124,4 +124,10 @@ class Cuser extends BaseController
         $this->model->delete($id);
         return redirect()->to('/lihatuser')->with('success', 'User berhasil dihapus.');
     }
+
+    public function setting() {
+        echo view('user/template/head.php');
+        echo view('user/template/header.php');
+        echo view('user/profile');
+    }
 }
