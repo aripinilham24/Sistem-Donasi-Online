@@ -18,6 +18,7 @@ class Beranda extends BaseController
     }
     public function index()
     {
+        $data['session'] = $this->getSession();
         $data['donasi'] = $this->model->getAllWithPercentage();
         echo view('user/template/head.php', $data);
         echo view('user/template/header.php', $data);

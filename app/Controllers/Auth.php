@@ -24,6 +24,7 @@ class Auth extends BaseController
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
             $user = $this->model->getUser($username);
+            $role = $user['role'];
 
             if ($user && $password === $user['password']) {
                 $session->set([
@@ -32,7 +33,12 @@ class Auth extends BaseController
                     'foto' => $user['foto'],
                     'logged_in' => true
                 ]);
-                return redirect()->to('/dashboard');
+                if($role === 'admin') {
+                    return redirect()->to('/dashboard');
+                }
+                if($role === 'user') {
+                    return redirect()->to('/beranda');
+                }
             } else {
                 return redirect()->back()->with('error', 'Login gagal! Username atau password salah.');
             }

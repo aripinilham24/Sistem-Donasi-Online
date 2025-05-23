@@ -11,6 +11,7 @@ $routes->get('/', 'Beranda::index');
 $routes->get('/auth/login', 'Auth::login');
 $routes->post('/Auth/proses_login', 'Auth::proses_login');
 $routes->get('/auth/logout', 'Auth::logout');
+$routes->get('/beranda', 'Beranda');
 $routes->get('beranda/detail_kampanye/(:num)', 'Beranda::detail_kampanye/$1');
 $routes->get('beranda/kategori/(:segment)', 'Beranda::kategori/$1');
 $routes->get('/dashboard', 'DashboardAdmin::index', ['filter' => 'auth']);

@@ -15,10 +15,7 @@
                         <a class="nav-link rounded" href="#">Galang Dana</a>
                         <a class="nav-link rounded" href="#">Tentang Kami</a>
                     </div>
-                    <div>
-                        <a href="<?= site_url('cuser/setting')?>">Setting profile</a>
-                        <a href="<?= site_url('auth/login') ?>" class="btn btn-outline-light">Login</a>
-                    </div>
+
                     <?php if (session()->get('logged_in') == true): ?>
                         <ul class="navbar-nav ml-auto">
                             <!-- Nav Item - User Information -->
@@ -27,11 +24,11 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span
                                         class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $session['username'] ?></span>
-                                    <img class="img-profile rounded-circle"
+                                    <img class="img-profile rounded-circle" width="50rem"
                                         src="<?= base_url('assets/uploads/users/' . $session['foto']) ?>">
                                 </a>
                                 <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                <div class="dropdown dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -52,8 +49,12 @@
                                     </a>
                                 </div>
                             </li>
-
                         </ul>
+                    <?php else: ?>
+                        <div>
+                            <a href="<?= site_url('cuser/setting') ?>">Setting profile</a>
+                            <a href="<?= site_url('auth/login') ?>" class="btn btn-outline-light">Login</a>
+                        </div>
                     <?php endif ?>
                 </div>
             </div>
