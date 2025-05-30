@@ -30,7 +30,7 @@
     <!-- carousel end -->
 
     <!-- kategori -->
-    <div class="row mt-5">
+    <div class="row mt-5 px-5">
         <div class="col-xl-3 col-md-6 mb-4">
             <a href="<?= site_url('beranda/kategori/sosial') ?>">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -110,13 +110,13 @@
     </div>
 
     <!-- daftar kampanye -->
-    <div class="container mt-5 shadow p-4">
-        <h3 class="">Daftar Kampanye</h3>
-        <div class="container row justify-content-evenly">
+    <div class="container-fluid mt-5 p-4">
+        <h3 class="fw-bold text-center">Daftar Kampanye</h3>
+        <div class="container d-flex flex-wrap justify-content-evenly">
             <?php foreach ($donasi as $data): ?>
                 <?php $width = round($data['persentase'] ?? 0) ?>
 
-                <div class="card shadow m-2" style="width: 30rem; height: 35rem;">
+                <div class="card shadow m-2 p-2" style="width: 30rem; height: 35rem;">
                     <img src="<?= base_url('assets/uploads/' . $data['gambar']) ?>"
                         class="card-img-top img-fluid mt-2 rounded object-fit-cover" style="height: 180px; width: 100%;"
                         alt="<?= $data['gambar'] ?>">
