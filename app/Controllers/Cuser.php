@@ -161,7 +161,7 @@ class Cuser extends BaseController
 
     // Update data ke DB (pakai model user, misalnya Muser)
     $this->model->update($id, [
-        'username' => $username,
+        'nama' => $username,
         'email' => $email,
         'password' => $password,
         'foto' => $fotoName

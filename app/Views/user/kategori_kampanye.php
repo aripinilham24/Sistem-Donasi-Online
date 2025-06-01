@@ -1,5 +1,5 @@
 <div class="container">
-    <button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left-circle"></i> Kembali</button>
+    <a href="<?= previous_url()?>" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Kembali</a>
     <?php if (empty($donasi)): ?>
         <div class="alert alert-warning">
             Tidak ada data donasi untuk saat ini.

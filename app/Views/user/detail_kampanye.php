@@ -1,5 +1,5 @@
 <main class="p-5">
-    <button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left-circle"></i> Kembali</button>
+    <a href="<?= previous_url()?>" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Kembali</a>
     <div class="container text-center">
         <img src="<?= base_url('assets/uploads/' . $data['detail_kampanye']['gambar']) ?>" alt="" class="rounded object-fit-cover"
             style="height: 20rem; width: 40rem;">

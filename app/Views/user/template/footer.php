@@ -22,11 +22,6 @@
   </div>
 </div>
 
-<a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">
-  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-  Logout
-</a>
-
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
     <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>

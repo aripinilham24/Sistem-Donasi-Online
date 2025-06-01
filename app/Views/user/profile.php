@@ -1,5 +1,10 @@
 <div class="container profile">
-    <button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left-circle"></i> Kembali</button>
+    <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('success') ?>
+            </div>
+        <?php endif; ?>
+    <a href="<?= previous_url()?>" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Kembali</a>
     <h1 class="text-center m-3">Profile</h1>
     <form class="row">
         <div class="col-4 text-center">

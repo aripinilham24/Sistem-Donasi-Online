@@ -1,5 +1,5 @@
 <div class="container profile">
-    <button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left-circle"></i> Kembali</button>
+    <a href="<?= previous_url()?>" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Kembali</a>
     <h1 class="text-center m-3">Edit Profile</h1>
     <form method="post" action="<?= site_url('cuser/update_profile') ?>" enctype="multipart/form-data" class="row">
         <div class="col-4 text-center">

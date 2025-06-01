@@ -24,7 +24,10 @@ class Auth extends BaseController
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
             $user = $this->model->getUser($username);
-            $role = $user['role'];
+            
+            if(!$user) {
+                return redirect()->back()->with('error', 'User tidak terdaftar!');
+            }
 
             if ($user && $password === $user['password']) {
                 $session->set([
@@ -36,6 +39,7 @@ class Auth extends BaseController
                     'password' => $user['password'],    
                     'logged_in' => true
                 ]);
+                $role = $user['role'];
                 if($role === 'admin') {
                     return redirect()->to('/dashboard');
                 }
