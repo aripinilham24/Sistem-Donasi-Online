@@ -61,7 +61,9 @@ abstract class BaseController extends Controller
             'title' => 'Dashboard',
             'role'  => session()->get('role'),
             'foto'  => session()->get('foto'),
-            'username'  => session()->get('username')
+            'password'  => session()->get('password'),
+            'username'  => session()->get('username'),
+            'email'  => session()->get('email')
         ];
     }
 }

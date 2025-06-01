@@ -28,9 +28,12 @@ class Auth extends BaseController
 
             if ($user && $password === $user['password']) {
                 $session->set([
+                    'id' => $user['id'],
                     'username' => $user['nama'],
+                    'email' => $user['email'],
                     'role' => $user['role'],
                     'foto' => $user['foto'],
+                    'password' => $user['password'],    
                     'logged_in' => true
                 ]);
                 if($role === 'admin') {

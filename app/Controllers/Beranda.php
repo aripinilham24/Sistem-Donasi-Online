@@ -27,6 +27,7 @@ class Beranda extends BaseController
     }
 
     public function kategori($kategori) {
+        $data['session'] = $this->getSession();
         $data['kategori'] = $kategori;
         $data['donasi'] = $this->model->getAllKategori($kategori);
         echo view('user/template/head.php', $data);
@@ -36,6 +37,7 @@ class Beranda extends BaseController
 
     public function detail_kampanye($id)
     {
+        $data['session'] = $this->getSession();
         $data['data'] = [
             'detail_kampanye' => $this->model->find($id),
             'donatur_kampanye' => $this->model_transaksi->donatur_kampanye($id),

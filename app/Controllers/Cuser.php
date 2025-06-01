@@ -126,8 +126,56 @@ class Cuser extends BaseController
     }
 
     public function setting() {
+        $data['session'] = $this->data;
+
         echo view('user/template/head.php');
-        echo view('user/template/header.php');
-        echo view('user/profile');
+        echo view('user/template/header.php', $data);
+        echo view('user/profile', $data);
+        // echo view('user/template/footer.php');
     }
+
+    public function edit_profile() {
+         $data['session'] = $this->data;
+
+        echo view('user/template/head.php');
+        echo view('user/template/header.php', $data);
+        echo view('user/edit_profile', $data);
+    }
+
+    public function update_profile()
+{
+    $session = session();
+    $id = $session->get('id'); // Sesuaikan dengan kolom ID user
+    $username = $this->request->getPost('username');
+    $email = $this->request->getPost('email');
+    $password = $this->request->getPost('password');
+
+    $foto = $this->request->getFile('foto');
+    $fotoName = $session->get('foto'); // default: nama file lama
+
+    // Jika file diupload dan valid
+    if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+        $fotoName = $foto->getRandomName();
+        $foto->move('assets/uploads/users', $fotoName);
+    }
+
+    // Update data ke DB (pakai model user, misalnya Muser)
+    $this->model->update($id, [
+        'username' => $username,
+        'email' => $email,
+        'password' => $password,
+        'foto' => $fotoName
+    ]);
+
+    // Update data di session
+    $session->set([
+        'username' => $username,
+        'email' => $email,
+        'password' => $password,
+        'foto' => $fotoName
+    ]);
+
+    return redirect()->to(site_url('cuser/setting'))->with('success', 'Profile updated!');
+}
+
 }

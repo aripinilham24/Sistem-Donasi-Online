@@ -1,22 +1,27 @@
-<div class="container">
-    <h1 class="text-center">Setting</h1>
-    <div class="text-center">
-        <img src="<?= base_url('assets/uploads/users/user.jpg') ?>" alt="profile pict" style="height: 20rem;" class="rounded-circle">
-    </div>
-    <form>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+<div class="container profile">
+    <button class="btn btn-secondary" onclick="history.back()"><i class="bi bi-arrow-left-circle"></i> Kembali</button>
+    <h1 class="text-center m-3">Profile</h1>
+    <form class="row">
+        <div class="col-4 text-center">
+            <img class="border" src="<?= base_url('assets/uploads/users/'.$session['foto']) ?>" alt="profile pict"
+                style="height: 20rem;">
         </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+        <div class="col-8 d-flex flex-column">
+            <label for="username">Username</label>
+            <input class="border border-0" type="text" name="username" id="username" value="<?= $session['username'] ?>"
+                readonly>
+                
+            <label for="username">Email</label>
+            <input class="border border-0" type="email" name="email" id="email" value="<?= $session['email'] ?>"
+                readonly>
+            
+            <label for="password">Password</label>
+            <input class="border border-0" type="password" name="password" id="password"
+                value="<?= $session['password'] ?>" readonly>
+            <a href="<?= site_url('cuser/edit_profile') ?>" class="btn btn-info w-auto align-self-start m-2">
+                <i class="bi bi-pencil-square"></i>
+                Edit
+            </a>
         </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

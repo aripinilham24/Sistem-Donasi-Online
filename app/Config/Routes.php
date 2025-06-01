@@ -29,5 +29,7 @@ $routes->get('/edit_user/(:num)', 'Cuser::edit/$1');
 $routes->put('/update_user/(:num)', 'Cuser::update/$1');
 $routes->get('/hapus_user/(:num)', 'Cuser::delete/$1');
 $routes->get('cuser/setting', 'Cuser::setting');
+$routes->get('cuser/edit_profile', 'Cuser::edit_profile');
+$routes->post('cuser/update_profile', 'Cuser::update_profile');
 
 
