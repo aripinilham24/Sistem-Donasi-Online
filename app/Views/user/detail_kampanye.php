@@ -22,7 +22,7 @@
             <h3>Deskripsi</h3>
             <p><?= $data['detail_kampanye']['deskripsi']?></p>
             <div>
-                <a href="#" class="btn btn-primary">Donasi</a>
+                <a href="<?= site_url('transaksi/')?>" class="btn btn-primary">Donasi</a>
             </div>
         </div>
 

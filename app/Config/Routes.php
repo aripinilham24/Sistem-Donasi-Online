@@ -31,5 +31,7 @@ $routes->get('/hapus_user/(:num)', 'Cuser::delete/$1');
 $routes->get('cuser/setting', 'Cuser::setting');
 $routes->get('cuser/edit_profile', 'Cuser::edit_profile');
 $routes->post('cuser/update_profile', 'Cuser::update_profile');
+$routes->get('transaksi/', 'Transaksi::index');
+$routes->get('transaksi/snapToken', 'Transaksi::snapToken');
 
 

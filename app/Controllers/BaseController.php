@@ -59,7 +59,6 @@ abstract class BaseController extends Controller
     public function getSession() {
         return [
             'title' => 'Dashboard',
-            'id' => session()->get('id'),
             'role'  => session()->get('role'),
             'foto'  => session()->get('foto'),
             'password'  => session()->get('password'),
