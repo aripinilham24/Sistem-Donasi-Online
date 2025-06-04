@@ -1,4 +1,4 @@
-<footer class="container-fluid bg-dark p-3">
+<footer class="container-fluid bg-dark p-3 position-absolute bottom-0">
         <div class="text-light text-center">
             Copyright &copy; HopeFund 2025
         </div>

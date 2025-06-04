@@ -1,4 +1,9 @@
 <main class="p-5">
+    <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success">
+                <?= session()->getFlashdata('success') ?>
+            </div>
+        <?php endif; ?>
     <a href="<?= previous_url()?>" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Kembali</a>
     <div class="container text-center">
         <img src="<?= base_url('assets/uploads/' . $data['detail_kampanye']['gambar']) ?>" alt="" class="rounded object-fit-cover"
@@ -22,7 +27,7 @@
             <h3>Deskripsi</h3>
             <p><?= $data['detail_kampanye']['deskripsi']?></p>
             <div>
-                <a href="<?= site_url('transaksi/')?>" class="btn btn-primary">Donasi</a>
+                <a href="<?= site_url('transaksi/'.$data['id_kampanye'])?>" class="btn btn-primary">Donasi</a>
             </div>
         </div>
 

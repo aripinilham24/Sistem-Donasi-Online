@@ -1,6 +1,17 @@
 <div class="container">
-    <h3>Donasi Rp10.000</h3>
-    <button id="pay-button">Bayar</button>
+    <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger">
+                <?= session()->getFlashdata('error') ?>
+            </div>
+        <?php endif; ?>
+    <form class="d-flex flex-column gap-3" action="<?= site_url('transaksi/donasi/'.$id_kampanye)?>" method="post">
+        <h3>Form Donasi</h3>
+        <label for="nominal">Nominal Donasi</label>
+        <input type="number" min="10000" name="nominal" id="nominal">
+        <label for="pesan">Pesan</label>
+        <input type="text" name="pesan" id="pesan">
+        <button id="pay-button" class="btn btn-primary" type="submit">Kirim</button>
+    </form>
     
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?= $midtrans_client_key?>"></script>
 

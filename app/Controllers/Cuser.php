@@ -10,7 +10,7 @@ class Cuser extends BaseController
 {
     protected $model;
     protected $data;
-    public function __construct() 
+    public function __construct()
     {
         $this->model = new Muser();
         $this->data = $this->getSession();
@@ -22,7 +22,7 @@ class Cuser extends BaseController
         echo view('template/header.php');
         echo view('template/sidebar.php');
         echo view('template/topnavbar.php', $data);
-        echo view('Vuser.php',$data);
+        echo view('Vuser.php', $data);
         echo view('template/footer.php');
     }
 
@@ -31,7 +31,7 @@ class Cuser extends BaseController
         $data['session'] = $this->data;
         echo view('template/header.php');
         echo view('template/sidebar.php');
-        echo view('template/topnavbar.php',$data);
+        echo view('template/topnavbar.php', $data);
         echo view('Vtambah_user.php');
         echo view('template/footer.php');
     }
@@ -79,7 +79,7 @@ class Cuser extends BaseController
         echo view('template/header.php');
         echo view('template/sidebar.php');
         echo view('template/topnavbar.php', $data);
-        echo view('Vedit_user.php',$data);
+        echo view('Vedit_user.php', $data);
         echo view('template/footer.php');
     }
 
@@ -125,57 +125,60 @@ class Cuser extends BaseController
         return redirect()->to('/lihatuser')->with('success', 'User berhasil dihapus.');
     }
 
-    public function setting() {
+    public function setting()
+    {
         $data['session'] = $this->data;
 
         echo view('user/template/head.php');
         echo view('user/template/header.php', $data);
         echo view('user/profile', $data);
-        // echo view('user/template/footer.php');
+        echo view('user/template/footer.php');
     }
 
-    public function edit_profile() {
-         $data['session'] = $this->data;
+    public function edit_profile()
+    {
+        $data['session'] = $this->data;
 
         echo view('user/template/head.php');
         echo view('user/template/header.php', $data);
         echo view('user/edit_profile', $data);
+        echo view('user/template/footer.php');
     }
 
     public function update_profile()
-{
-    $session = session();
-    $id = $session->get('id'); // Sesuaikan dengan kolom ID user
-    $username = $this->request->getPost('username');
-    $email = $this->request->getPost('email');
-    $password = $this->request->getPost('password');
+    {
+        $session = session();
+        $id = $session->get('id'); // Sesuaikan dengan kolom ID user
+        $username = $this->request->getPost('username');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
 
-    $foto = $this->request->getFile('foto');
-    $fotoName = $session->get('foto'); // default: nama file lama
+        $foto = $this->request->getFile('foto');
+        $fotoName = $session->get('foto'); // default: nama file lama
 
-    // Jika file diupload dan valid
-    if ($foto && $foto->isValid() && !$foto->hasMoved()) {
-        $fotoName = $foto->getRandomName();
-        $foto->move('assets/uploads/users', $fotoName);
+        // Jika file diupload dan valid
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            $fotoName = $foto->getRandomName();
+            $foto->move('assets/uploads/users', $fotoName);
+        }
+
+        // Update data ke DB (pakai model user, misalnya Muser)
+        $this->model->update($id, [
+            'nama' => $username,
+            'email' => $email,
+            'password' => $password,
+            'foto' => $fotoName
+        ]);
+
+        // Update data di session
+        $session->set([
+            'username' => $username,
+            'email' => $email,
+            'password' => $password,
+            'foto' => $fotoName
+        ]);
+
+        return redirect()->to(site_url('cuser/setting'))->with('success', 'Profile updated!');
     }
-
-    // Update data ke DB (pakai model user, misalnya Muser)
-    $this->model->update($id, [
-        'nama' => $username,
-        'email' => $email,
-        'password' => $password,
-        'foto' => $fotoName
-    ]);
-
-    // Update data di session
-    $session->set([
-        'username' => $username,
-        'email' => $email,
-        'password' => $password,
-        'foto' => $fotoName
-    ]);
-
-    return redirect()->to(site_url('cuser/setting'))->with('success', 'Profile updated!');
-}
 
 }
