@@ -1,6 +1,8 @@
 <div class="container">
     <h3>Donasi Rp10.000</h3>
     <button id="pay-button">Bayar</button>
+    
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?= $midtrans_client_key?>"></script>
 
     <script>
         document.getElementById('pay-button').addEventListener('click', function () {
