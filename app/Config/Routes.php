@@ -33,5 +33,7 @@ $routes->get('cuser/edit_profile', 'Cuser::edit_profile');
 $routes->post('cuser/update_profile', 'Cuser::update_profile');
 $routes->get('transaksi/(:num)', 'Transaksi::index/$1');
 $routes->post('transaksi/donasi/(:num)', 'Transaksi::donasi/$1');
-$routes->get('transaksi/snapToken', 'Transaksi::snapToken');
+
+// midtrans
 $routes->get('donasi', 'Donasi::index');
+$routes->get('donasi/bayar', 'Donasi::bayar');

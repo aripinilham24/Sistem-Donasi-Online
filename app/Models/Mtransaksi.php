@@ -12,10 +12,10 @@ class Mtransaksi extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id', 'kampanye_id', 'user_id', 'nama_donatur', 'nominal', 'pesan', 'dibuat_pada'];
+    protected $allowedFields    = ['id', 'kampanye_id', 'user_id', 'nominal', 'pesan', 'dibuat_pada'];
 
     public function donatur_kampanye($id){
-        return $this->select('donasi_transaksi.*, users.id, users.foto')
+        return $this->select('donasi_transaksi.*, users.id, users.foto, users.nama as nama_donatur')
         ->join('users', 'users.id = donasi_transaksi.user_id')
         ->where('kampanye_id', $id)->findAll();
     }

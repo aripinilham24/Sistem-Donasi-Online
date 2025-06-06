@@ -28,7 +28,8 @@
         </div>
     </div>
     <!-- carousel end -->
-
+<?= env('MIDTRANS_CLIENT_KEY')?>
+<?= getenv('MIDTRANS_SERVER_KEY')?>
     <!-- kategori -->
     <div class="row mt-5 px-5">
         <div class="col-xl-3 col-md-6 mb-4">

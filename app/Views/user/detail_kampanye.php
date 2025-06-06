@@ -27,7 +27,8 @@
             <h3>Deskripsi</h3>
             <p><?= $data['detail_kampanye']['deskripsi']?></p>
             <div>
-                <a href="<?= site_url('donasi/')?>" class="btn btn-primary">Donasi</a>
+                <a href="<?= site_url('transaksi/'.$data['id_kampanye'])?>" class="btn btn-primary">Donasi</a>
+                <a href="<?= site_url('donasi')?>" class="btn btn-primary">Testing Midtrans</a>
             </div>
         </div>
 
@@ -35,7 +36,7 @@
             <h3>Donatur (<?= $data['total_donatur']?>)</h3>
             <?php foreach($data['donatur_kampanye'] as $data): ?>
             <div class="row border-bottom border-info rounded p-1">
-                <img src="<?= base_url('assets/uploads/users/'.$data['foto'])?>" alt="profile" class="col-2 rounded-circle">
+                <img src="<?= base_url('assets/uploads/users/'.$data['foto'])?>" alt="profile" class="col-2 rounded-circle object-fit-cover img-fluid">
                 <div class="col-10">
                     <div class="d-flex gap-3">
                         <span class="fw-bold"><?= $data['nama_donatur']?></span>

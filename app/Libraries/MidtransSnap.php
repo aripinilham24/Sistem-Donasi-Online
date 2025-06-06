@@ -3,16 +3,22 @@
 namespace App\Libraries;
 
 use Midtrans\Config;
+use Midtrans\Snap;
 
 class MidtransSnap
 {
     public function __construct()
     {
-        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = false; // Sandbox mode
+        // Ambil dari .env
+        Config::$serverKey = getenv('MIDTRANS_SERVER_KEY');
+        Config::$isProduction = false; // true = live
         Config::$isSanitized = true;
         Config::$is3ds = true;
-        
+        // Config::$curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
+    }
 
+    public function createSnapToken($params)
+    {
+        return Snap::getSnapToken($params);
     }
 }

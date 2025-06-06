@@ -5,9 +5,6 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Mtransaksi;
-use App\Libraries\MidtransSnap;
-use Midtrans\Snap;
-use Midtrans\Config as MidtransConfig;
 
 class Transaksi extends BaseController
 {
@@ -54,31 +51,5 @@ class Transaksi extends BaseController
 
         return redirect()->to('beranda/detail_kampanye/' . $id)->with('success', 'Donasi berhasil dikirim!');
     }
-    public function snapToken()
-    {
-        try {
-            new MidtransSnap(); // Init config Midtrans
-
-            // Data dummy untuk testing
-            $params = array(
-                'transaction_details' => array(
-                    'order_id' => rand(),
-                    'gross_amount' => 10000,
-                ),
-                'customer_details' => array(
-                    'first_name' => 'budi',
-                    'last_name' => 'pratama',
-                    'email' => 'budi.pra@example.com',
-                    'phone' => '08111222333',
-                ),
-            );
-
-            $snapToken = \Midtrans\Snap::getSnapToken($params);
-            return $this->response->setJSON(['snapToken' => $snapToken]);
-        } catch (\Throwable $e) {
-            log_message('error', 'Midtrans Error: ' . $e->getMessage());
-            return $this->response->setJSON(['error' => 'Terjadi kesalahan server: ' . $e->getMessage()])
-                ->setStatusCode(500);
-        }
-    }
+    
 }

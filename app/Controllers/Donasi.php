@@ -4,54 +4,53 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Libraries\MidtransSnap;
 
 class Donasi extends BaseController
 {
 
-    public function index()
-    {
+    public function index() {
 
-        /*Install Midtrans PHP Library (https://github.com/Midtrans/midtrans-php)
-composer require midtrans/midtrans-php
-                              
-Alternatively, if you are not using **Composer**, you can download midtrans-php library 
-(https://github.com/Midtrans/midtrans-php/archive/master.zip), and then require 
-the file manually.   
+        if (!session()->get('id')) {
+            return redirect()->to('auth/login')->with('error', 'Silakan login untuk berdonasi.');
+        }
 
-require_once dirname(__FILE__) . '/pathofproject/Midtrans.php'; */
-
-        //SAMPLE REQUEST START HERE
-
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-        
-
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => 10000,
-            ),
-            'customer_details' => array(
-                'first_name' => 'budi',
-                'last_name' => 'pratama',
-                'email' => 'budi.pra@example.com',
-                'phone' => '08111222333',
-            ),
-        );
-
-        
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $data['SnapToken'] = $snapToken;
+        $data['session'] = $this->getSession();
+        $data['title'] = 'Donasi';
         $data['midtrans_client_key'] = env('MIDTRANS_CLIENT_KEY');
+        $data['id_kampanye'] = 1; // Ganti dengan ID kampanye yang sesuai
+        $data['snapToken'] = '';
 
+        echo view('user/template/head.php', $data);
+        echo view('user/template/header.php', $data);
+        echo view('user/vdonasi.php', $data);
+        echo view('user/template/footer.php');
+    }
 
-        return view('user/vdonasi.php', $data);
+   public function bayar()
+    {
+        $midtrans = new MidtransSnap();
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => uniqid(),
+                'gross_amount' => 10000,
+            ],
+            'customer_details' => [
+                'first_name' => 'Budi',
+                'email' => 'budi@example.com',
+            ],
+        ];
+
+        $data['snapToken'] = $midtrans->createSnapToken($params);
+        $data['session'] = $this->getSession();
+        $data['title'] = 'Donasi';
+        $data['midtrans_client_key'] = env('MIDTRANS_CLIENT_KEY');
+        $data['id_kampanye'] = 1; // Ganti dengan ID kampanye yang sesuai
+
+        echo view('user/template/head.php', $data);
+        echo view('user/template/header.php', $data);
+        echo view('user/vdonasi.php', $data);
+        echo view('user/template/footer.php');
     }
 }
