@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Mtransaksi;
 use App\Libraries\MidtransSnap;
+use Midtrans\Snap;
+use Midtrans\Config as MidtransConfig;
 
 class Transaksi extends BaseController
 {
@@ -26,7 +28,7 @@ class Transaksi extends BaseController
         $data['title'] = 'Donasi';
         $data['id_kampanye'] = $id;
 
-        echo view('user/template/head.php');
+        echo view('user/template/head.php', $data);
         echo view('user/template/header.php', $data);
         echo view('user/donasi.php', $data);
         echo view('user/template/footer.php');
@@ -54,21 +56,29 @@ class Transaksi extends BaseController
     }
     public function snapToken()
     {
-        new MidtransSnap(); // Init config Midtrans
+        try {
+            new MidtransSnap(); // Init config Midtrans
 
-        // Data dummy untuk testing
-        $params = [
-            'transaction_details' => [
-                'order_id' => uniqid(), // bisa pakai id dari DB
-                'gross_amount' => 10000, // nominal donasi
-            ],
-            'customer_details' => [
-                'first_name' => 'John',
-                'email' => 'john@example.com',
-            ],
-        ];
+            // Data dummy untuk testing
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => rand(),
+                    'gross_amount' => 10000,
+                ),
+                'customer_details' => array(
+                    'first_name' => 'budi',
+                    'last_name' => 'pratama',
+                    'email' => 'budi.pra@example.com',
+                    'phone' => '08111222333',
+                ),
+            );
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return $this->response->setJSON(['snapToken' => $snapToken]);
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            return $this->response->setJSON(['snapToken' => $snapToken]);
+        } catch (\Throwable $e) {
+            log_message('error', 'Midtrans Error: ' . $e->getMessage());
+            return $this->response->setJSON(['error' => 'Terjadi kesalahan server: ' . $e->getMessage()])
+                ->setStatusCode(500);
+        }
     }
 }
