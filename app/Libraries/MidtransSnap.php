@@ -14,7 +14,7 @@ class MidtransSnap
         Config::$isProduction = false; // true = live
         Config::$isSanitized = true;
         Config::$is3ds = true;
-        // Config::$curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
+        
     }
 
     public function createSnapToken($params)

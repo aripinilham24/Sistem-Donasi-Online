@@ -5,14 +5,17 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Mtransaksi;
+use App\Models\Mdonasi;
 
 class Transaksi extends BaseController
 {
     protected $model;
+    protected $kampanyeModel;
     protected $data;
     public function __construct()
     {
         $this->model = new Mtransaksi();
+        $this->kampanyeModel = new Mdonasi();
         $this->data = $this->getSession();
     }
     public function index($id)
@@ -33,6 +36,7 @@ class Transaksi extends BaseController
 
     public function donasi($id)
     {
+
         $user_id = session()->get('id');
         $kampanye_id = $id;
         $pesan = $this->request->getPost('pesan');
@@ -48,8 +52,11 @@ class Transaksi extends BaseController
             'pesan' => $pesan,
             'nominal' => $nominal
         ]);
+        $this->kampanyeModel->set('terkumpul', 'terkumpul + ' . (int)$nominal, false)
+                    ->where('id', $kampanye_id)
+                    ->update();
 
         return redirect()->to('beranda/detail_kampanye/' . $id)->with('success', 'Donasi berhasil dikirim!');
     }
-    
+
 }

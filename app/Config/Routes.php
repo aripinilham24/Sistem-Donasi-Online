@@ -35,5 +35,5 @@ $routes->get('transaksi/(:num)', 'Transaksi::index/$1');
 $routes->post('transaksi/donasi/(:num)', 'Transaksi::donasi/$1');
 
 // midtrans
-$routes->get('donasi', 'Donasi::index');
+$routes->post('donasi/(:num)', 'Donasi::index/$1');
 $routes->get('donasi/bayar', 'Donasi::bayar');

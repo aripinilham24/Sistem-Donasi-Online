@@ -5,6 +5,7 @@
         <input class="form-control" type="number" min="10000" name="nominal" id="nominal">
         <label class="form-label" for="pesan">Pesan</label>
         <input class="form-control" type="text" name="pesan" id="pesan">
-        <button type="submit" class="btn btn-primary mt-3" id="pay">Donasikan</button>
+        <button type="submit" class="btn btn-primary mt-3" id="pay">Submit</button>
     </form>
 </main>
+

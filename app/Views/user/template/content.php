@@ -28,8 +28,7 @@
         </div>
     </div>
     <!-- carousel end -->
-<?= env('MIDTRANS_CLIENT_KEY')?>
-<?= getenv('MIDTRANS_SERVER_KEY')?>
+
     <!-- kategori -->
     <div class="row mt-5 px-5">
         <div class="col-xl-3 col-md-6 mb-4">
@@ -40,7 +39,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Sosial</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">null</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_kampanye['sosial']?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="bi bi-globe-americas" style="font-size: 2rem;"></i>
@@ -59,7 +58,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Pendidikan</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">null</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_kampanye['pendidikan']?></div>
 
                             </div>
                             <div class="col-auto">
@@ -79,7 +78,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Lingkungan
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">null</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_kampanye['lingkungan']?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="bi bi-Tree" style="font-size: 2rem;"></i>
@@ -98,7 +97,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Keagamaan</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">null</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $jumlah_kampanye['keagamaan']?></div>
                             </div>
                             <div class="col-auto">
                                 <i class="bi bi-bank" style="font-size: 2rem;"></i>

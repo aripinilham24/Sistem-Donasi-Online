@@ -20,6 +20,12 @@ class Beranda extends BaseController
     {
         $data['session'] = $this->getSession();
         $data['donasi'] = $this->model->getAllWithPercentage();
+        $data['jumlah_kampanye'] = [
+            'sosial' => $this->model->countByKategori('sosial'),
+            'pendidikan' => $this->model->countByKategori('pendidikan'),
+            'lingkungan' => $this->model->countByKategori('lingkungan'),
+            'keagamaan' => $this->model->countByKategori('keagamaan')
+        ];
         echo view('user/template/head.php', $data);
         echo view('user/template/header.php', $data);
         echo view('user/template/content.php', $data);

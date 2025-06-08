@@ -44,6 +44,9 @@ class Mdonasi extends Model
         return $donations;
     }
     
+    public function countByKategori($kategori) {
+       return $this->where('kategori', $kategori)->countAllResults();
+    }
     // Hitung persentase
     protected function calculatePercentage($terkumpul, $target)
     {
