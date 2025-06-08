@@ -1,3 +1,17 @@
+# Cara menggunakan website ini
+<h3>Login</h3>
+Admin:
+Username = admin
+Password = 123
+
+User:
+Username = Arifin
+Password = arifin123
+
+<h3>Access Key Midtrans</h3>
+MIDTRANS_SERVER_KEY = SB-Mid-server-kzl9A9atlGdeWWD74O0578rc
+MIDTRANS_CLIENT_KEY = SB-Mid-client-ALi6ftpLZwfbHfVw
+
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
