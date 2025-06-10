@@ -23,23 +23,36 @@ class Donasi extends BaseController
         $jumlah = $this->request->getPost('donasi');
         $pesan = $this->request->getPost('pesan');
 
+        $order_id = uniqid('DONASI-');
+
+        // Simpan data ke database
+        $donasiModel = new \App\Models\DonasiModel();
+        $donasiModel->insert([
+            'order_id' => $order_id,
+            'id_kampanye' => $id,
+            'nama' => $nama,
+            'email' => $email,
+            'pesan' => $pesan,
+            'jumlah' => $jumlah,
+            'status' => 'Menunggu',
+        ]);
+
+        // Siapkan parameter Midtrans
         $params = [
             'transaction_details' => [
-                'order_id' => uniqid(),
+                'order_id' => $order_id,
                 'gross_amount' => $jumlah,
-                'id_kmpanye' => $id, 
             ],
             'customer_details' => [
-                'name' => $nama,
+                'first_name' => $nama,
                 'email' => $email,
-                'pesan' => $pesan,
             ],
         ];
 
         $data['session'] = $this->getSession();
         $data['title'] = 'Donasi';
         $data['midtrans_client_key'] = env('MIDTRANS_CLIENT_KEY');
-        $data['id_kampanye'] = $id; 
+        $data['id_kampanye'] = $id;
         $data['snapToken'] = $midtrans->createSnapToken($params);
         $data['detail_donasi'] = [
             'nama' => $nama,
@@ -81,4 +94,32 @@ class Donasi extends BaseController
         echo view('user/vdonasi.php', $data);
         echo view('user/template/footer.php');
     }
+
+    public function callback()
+    {
+        // Ambil payload notifikasi
+        $json_result = file_get_contents('php://input');
+        $result = json_decode($json_result);
+
+        // Cek status pembayaran dari Midtrans
+        if ($result->transaction_status == 'settlement') {
+            $orderId = $result->order_id;
+            $grossAmount = $result->gross_amount;
+
+            // Update status donasi berdasarkan order_id
+            $donasiModel = new \App\Models\DonasiModel();
+            $donasiModel->updateByOrderId($orderId, [
+                'status' => 'Sukses',
+                'jumlah' => $grossAmount,
+                'tanggal_pembayaran' => date('Y-m-d H:i:s'),
+            ]);
+
+            // Optional: log transaksi sukses
+            log_message('info', 'Donasi berhasil: ' . $orderId);
+        }
+
+        // Return response ke Midtrans
+        return $this->response->setStatusCode(200)->setBody('OK');
+    }
+
 }

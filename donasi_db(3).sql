@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2025 at 11:31 AM
+-- Generation Time: Jun 10, 2025 at 02:46 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.16
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `donasi_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donasi`
+--
+
+CREATE TABLE `donasi` (
+  `id` int NOT NULL,
+  `order_id` varchar(50) NOT NULL,
+  `id_kampanye` int NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `pesan` text,
+  `jumlah` int NOT NULL,
+  `status` enum('Menunggu','Sukses','Gagal') DEFAULT 'Menunggu',
+  `tanggal_pembayaran` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `donasi`
+--
+
+INSERT INTO `donasi` (`id`, `order_id`, `id_kampanye`, `nama`, `email`, `pesan`, `jumlah`, `status`, `tanggal_pembayaran`, `created_at`, `updated_at`) VALUES
+(1, 'DONASI-68479b560a067', 0, '', '', NULL, 1000, 'Menunggu', NULL, '2025-06-10 09:41:26', '2025-06-10 09:41:26');
 
 -- --------------------------------------------------------
 
@@ -45,7 +72,7 @@ CREATE TABLE `donasi_kampanye` (
 --
 
 INSERT INTO `donasi_kampanye` (`id`, `judul`, `deskripsi_singkat`, `deskripsi`, `target_donasi`, `terkumpul`, `deadline`, `gambar`, `dibuat_pada`, `kategori`) VALUES
-(1, 'Bantu Korban Banjir Jakarta', 'Penggalangan dana untuk membantu korban banjir di Jakarta dengan menyediakan makanan, pakaian, dan tempat tinggal sementara.', 'Banjir besar melanda beberapa wilayah Jakarta pada awal April 2025, menyebabkan ribuan keluarga kehilangan tempat tinggal dan akses terhadap kebutuhan dasar. Dana yang terkumpul akan digunakan untuk: \r\n1. Paket sembako untuk 1000 keluarga\r\n2. Perlengkapan kebersihan dan kesehatan\r\n3. Bantuan sewa tempat tinggal sementara\r\n4. Perbaikan rumah-rumah yang rusak\r\n5. Program pemulihan psikologis untuk anak-anak ', 50000000, '5000000.00', '2025-05-30', 'banjir.jpg', '2025-04-20 10:00:00', 'sosial'),
+(1, 'Bantu Korban Banjir Jakarta', 'Penggalangan dana untuk membantu korban banjir di Jakarta dengan menyediakan makanan, pakaian, dan tempat tinggal sementara.', 'Banjir besar melanda beberapa wilayah Jakarta pada awal April 2025, menyebabkan ribuan keluarga kehilangan tempat tinggal dan akses terhadap kebutuhan dasar. Dana yang terkumpul akan digunakan untuk: \r\n1. Paket sembako untuk 1000 keluarga\r\n2. Perlengkapan kebersihan dan kesehatan\r\n3. Bantuan sewa tempat tinggal sementara\r\n4. Perbaikan rumah-rumah yang rusak\r\n5. Program pemulihan psikologis untuk anak-anak ', 50000000, '15000000.00', '2025-05-30', 'banjir.jpg', '2025-04-20 10:00:00', 'sosial'),
 (2, 'Pembangunan Sekolah di Pedesaan', 'Membangun sekolah dasar di daerah terpencil untuk memberikan akses pendidikan yang layak bagi anak-anak.', 'Proyek ini bertujuan membangun sekolah dasar dengan 6 ruang kelas di Desa Terpencil, Kabupaten Sumba Barat Daya. Fasilitas yang akan dibangun:\r\n1. Bangunan sekolah permanen\r\n2. Perpustakaan mini\r\n3. Fasilitas sanitasi (toilet dan wastafel)\r\n4. Lapangan bermain\r\n5. Perlengkapan belajar (meja, kursi, papan tulis)\r\nSekolah ini akan melayani 120 anak dari 3 dusun terdekat yang saat ini harus berjalan 5-7 km ke sekolah terdekat.', 75000000, '500000.00', '2025-06-15', 'sekolah.jpg', '2025-04-18 14:30:00', 'pendidikan'),
 (3, 'Bantuan Medis untuk Lansia', 'Menyediakan layanan kesehatan gratis dan obat-obatan untuk lansia yang tidak mampu.', 'Program ini menyediakan layanan kesehatan komprehensif untuk lansia tidak mampu di 5 kabupaten:\r\n1. Pemeriksaan kesehatan gratis bulanan\r\n2. Penyediaan obat-obatan dasar\r\n3. Kacamata baca dan alat bantu dengar\r\n4. Terapi fisik untuk lansia dengan mobilitas terbatas\r\n5. Pendampingan nutrisi dan pola hidup sehat\r\nTarget kami adalah membantu 500 lansia selama 6 bulan ke depan.', 30000000, '500000.00', '2025-05-20', 'lansia.jpg', '2025-04-15 09:15:00', 'sosial'),
 (4, 'Penghijauan Kota', 'Program penanaman 1000 pohon di area perkotaan untuk mengurangi polusi udara.', 'Inisiatif penghijauan ini akan dilakukan di 5 titik utama kota dengan penanaman:\r\n1. 500 pohon peneduh (trembesi, angsana)\r\n2. 300 pohon buah (mangga, jambu)\r\n3. 200 tanaman hias (kembang sepatu, bougenville)\r\nSetiap pohon akan dilengkapi dengan:\r\n- Sistem penyiraman otomatis\r\n- Pemantauan pertumbuhan\r\n- Edukasi masyarakat sekitar\r\nKami juga akan melibatkan 200 relawan dan siswa sekolah dalam program ini.', 25000000, '500000.00', '2025-07-10', 'penghijauan.jpg', '2025-04-10 11:45:00', 'lingkungan'),
@@ -78,7 +105,9 @@ INSERT INTO `donasi_transaksi` (`id`, `kampanye_id`, `user_id`, `nominal`, `pesa
 (4, 3, 5, 300000, 'Semoga lansia bisa lebih sehat', '2025-04-16 04:20:00'),
 (5, 5, 2, 250000, 'Sayangi hewan-hewan terlantar', '2025-04-06 02:45:00'),
 (6, 2, 2, 1000000, 'semoga membantu', NULL),
-(7, 2, 2, 1000000, 'Semoga membantu!', '2025-06-04 00:41:33');
+(7, 2, 2, 1000000, 'Semoga membantu!', '2025-06-04 00:41:33'),
+(8, 2, 2, 10000000, 'Semangat!', '2025-06-06 17:18:22'),
+(9, 1, 2, 10000000, 'sem', '2025-06-08 08:58:32');
 
 -- --------------------------------------------------------
 
@@ -111,6 +140,13 @@ INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `foto`) VALUES
 --
 
 --
+-- Indexes for table `donasi`
+--
+ALTER TABLE `donasi`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `order_id` (`order_id`);
+
+--
 -- Indexes for table `donasi_kampanye`
 --
 ALTER TABLE `donasi_kampanye`
@@ -136,6 +172,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `donasi`
+--
+ALTER TABLE `donasi`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `donasi_kampanye`
 --
 ALTER TABLE `donasi_kampanye`
@@ -145,7 +187,7 @@ ALTER TABLE `donasi_kampanye`
 -- AUTO_INCREMENT for table `donasi_transaksi`
 --
 ALTER TABLE `donasi_transaksi`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
