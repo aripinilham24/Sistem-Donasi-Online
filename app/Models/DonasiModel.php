@@ -12,8 +12,8 @@ class DonasiModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['order_id', 'status', 'jumlah', 'tanggal_pembayaran'];
-
+    protected $allowedFields = ['order_id', 'id_kampanye', 'nama', 'email', 'pesan', 'status', 'jumlah'];
+    
     public function updateByOrderId($orderId, $data)
     {
         return $this->where('order_id', $orderId)->set($data)->update();

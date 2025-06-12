@@ -18,6 +18,7 @@ class Donasi extends BaseController
 
         $midtrans = new MidtransSnap();
 
+        $user_id = session()->get('id');
         $nama = $this->request->getPost('nama');
         $email = $this->request->getPost('email');
         $jumlah = $this->request->getPost('donasi');
@@ -36,6 +37,7 @@ class Donasi extends BaseController
             'jumlah' => $jumlah,
             'status' => 'Menunggu',
         ]);
+
 
         // Siapkan parameter Midtrans
         $params = [
@@ -96,30 +98,40 @@ class Donasi extends BaseController
     }
 
     public function callback()
-    {
-        // Ambil payload notifikasi
-        $json_result = file_get_contents('php://input');
-        $result = json_decode($json_result);
+{
+    $json_result = file_get_contents('php://input');
+    $result = json_decode($json_result);
 
-        // Cek status pembayaran dari Midtrans
-        if ($result->transaction_status == 'settlement') {
-            $orderId = $result->order_id;
-            $grossAmount = $result->gross_amount;
+    if ($result->transaction_status == 'settlement') {
+        $orderId = $result->order_id;
+        $grossAmount = $result->gross_amount;
 
-            // Update status donasi berdasarkan order_id
-            $donasiModel = new \App\Models\DonasiModel();
+        // Load model
+        $donasiModel = new \App\Models\DonasiModel();
+        $kampanyeModel = new \App\Models\Mdonasi();
+
+        // Ambil data donasi berdasarkan order_id
+        $donasi = $donasiModel->where('order_id', $orderId)->first();
+
+        if ($donasi) {
+            // Update status donasi
             $donasiModel->updateByOrderId($orderId, [
                 'status' => 'Sukses',
                 'jumlah' => $grossAmount,
                 'tanggal_pembayaran' => date('Y-m-d H:i:s'),
             ]);
 
-            // Optional: log transaksi sukses
-            log_message('info', 'Donasi berhasil: ' . $orderId);
-        }
+            // Tambahkan jumlah donasi ke kolom terkumpul pada kampanye
+            $kampanyeModel->where('id', $donasi['id_kampanye'])
+                          ->set('terkumpul', 'terkumpul + ' . (int)$grossAmount, false)
+                          ->update();
 
-        // Return response ke Midtrans
-        return $this->response->setStatusCode(200)->setBody('OK');
+            log_message('info', 'Donasi berhasil dan kampanye diperbarui: ' . $orderId);
+        }
     }
+
+    return $this->response->setStatusCode(200)->setBody('OK');
+}
+
 
 }
